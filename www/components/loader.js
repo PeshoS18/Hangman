@@ -14,13 +14,13 @@ const wordLists = {
 
 // Image progression based on wrong guesses
 const imageProgression = {
-    0: 'Pictures/Begin_Picture.png',
-    1: 'Pictures/Begin_Picture.png',
-    2: 'Pictures/Begin_Picture.png',
-    3: 'Pictures/Are_You_Serious_Picture.png',
-    4: 'Pictures/Are_You_Serious_Picture.png',
-    5: 'Pictures/Are_You_Serious_Picture.png',
-    6: 'Pictures/Are_You_Serious_Picture.png'
+    0: 'www/Pictures/Begin_Picture.png',
+    1: 'www/Pictures/Begin_Picture.png',
+    2: 'www/Pictures/Begin_Picture.png',
+    3: 'www/Pictures/Are_You_Serious_Picture.png',
+    4: 'www/Pictures/Are_You_Serious_Picture.png',
+    5: 'www/Pictures/Are_You_Serious_Picture.png',
+    6: 'www/Pictures/Are_You_Serious_Picture.png'
 };
 
 // Game state
@@ -227,7 +227,7 @@ function updateHangmanImage() {
     const index = Math.min(gameState.wrongGuesses, 6);
     
     if (gameState.showLetHimCook && !gameState.gameOver) {
-        hangmanImage.src = 'Pictures/Let_Him_Cook_Picture.png';
+        hangmanImage.src = 'www/Pictures/Let_Him_Cook_Picture.png';
     } else {
         hangmanImage.src = imageProgression[index];
     }
@@ -280,12 +280,12 @@ function endGame(won) {
         gameOverTitle.textContent = '🎉 ПОБЕДА!';
         gameOverMessage.textContent = `Поздравления! Открихте думата: ${gameState.word}`;
         playWinSound();
-        gameOverImage.src = 'Pictures/GigaChad_Picture.png';
+        gameOverImage.src = 'www/Pictures/GigaChad_Picture.png';
     } else {
         gameOverTitle.textContent = '😔 ЗАГУБА!';
         gameOverMessage.textContent = `Жалко! Думата беше: ${gameState.word}`;
         playLoseSound();
-        gameOverImage.src = 'Pictures/Dead_Picture.png';
+        gameOverImage.src = 'www/Pictures/Dead_Picture.png';
     }
 
     gameOverModal.classList.remove('d-none');
