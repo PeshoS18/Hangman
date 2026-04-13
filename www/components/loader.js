@@ -287,12 +287,12 @@ function endGame(won) {
     const gameOverImage = document.getElementById('gameOverImage');
 
     if (won) {
-        gameOverTitle.textContent = '🎉 ПОБЕДА!';
+        gameOverTitle.textContent = 'ПОБЕДА!';
         gameOverMessage.textContent = `Поздравления! Открихте думата: ${gameState.word}`;
         playWinSound();
         gameOverImage.src = 'Pictures/GigaChad_Picture.png';
     } else {
-        gameOverTitle.textContent = '😔 ЗАГУБА!';
+        gameOverTitle.textContent = 'ЗАГУБА!';
         gameOverMessage.textContent = `Жалко! Думата беше: ${gameState.word}`;
         playLoseSound();
         gameOverImage.src = 'Pictures/Dead_Picture.png';
