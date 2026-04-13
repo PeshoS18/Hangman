@@ -14,13 +14,13 @@ const wordLists = {
 
 // Image progression based on wrong guesses
 const imageProgression = {
-    0: 'www/Pictures/Begin_Picture.png',
-    1: 'www/Pictures/Begin_Picture.png',
-    2: 'www/Pictures/Begin_Picture.png',
-    3: 'www/Pictures/Are_You_Serious_Picture.png',
-    4: 'www/Pictures/Are_You_Serious_Picture.png',
-    5: 'www/Pictures/Are_You_Serious_Picture.png',
-    6: 'www/Pictures/Are_You_Serious_Picture.png'
+    0: 'Pictures/Begin_Picture.png',
+    1: 'Pictures/Begin_Picture.png',
+    2: 'Pictures/Begin_Picture.png',
+    3: 'Pictures/Are_You_Serious_Picture.png',
+    4: 'Pictures/Are_You_Serious_Picture.png',
+    5: 'Pictures/Are_You_Serious_Picture.png',
+    6: 'Pictures/Are_You_Serious_Picture.png'
 };
 
 // Game state
@@ -113,6 +113,7 @@ function makeGuess() {
     if (!input) return;
 
     let isCorrectGuess = false;
+    let gameEnded = false;
 
     // Check if it's a single letter or full word
     if (input.length === 1) {
@@ -125,12 +126,10 @@ function makeGuess() {
         if (gameState.word.includes(input)) {
             gameState.guessedLetters.add(input);
             isCorrectGuess = true;
-            playCorrectGuessSound();
         } else {
             gameState.wrongLetters.add(input);
             gameState.wrongGuesses++;
             gameState.currentLives--;
-            playWrongGuessSound();
             isCorrectGuess = false;
         }
     } else {
@@ -138,17 +137,19 @@ function makeGuess() {
         if (input === gameState.word) {
             // Won!
             gameState.guessedLetters = new Set(gameState.word);
+            gameEnded = true;
             endGame(true);
-            return;
         } else {
             // Wrong word guess - costs a life
             gameState.wrongLetters.add(input);
             gameState.wrongGuesses++;
             gameState.currentLives--;
-            playWrongGuessSound();
             isCorrectGuess = false;
         }
     }
+
+    // If word was guessed, don't continue
+    if (gameEnded) return;
 
     // Track consecutive correct guesses
     if (isCorrectGuess) {
@@ -171,13 +172,22 @@ function makeGuess() {
     updateDisplay();
     updateHangmanImage();
 
-    // Check win condition
+    // Check win condition BEFORE playing sounds
     if (isGameWon()) {
         endGame(true);
+        return;
     }
-    // Check lose condition
-    else if (gameState.currentLives <= 0) {
+    // Check lose condition BEFORE playing sounds
+    if (gameState.currentLives <= 0) {
         endGame(false);
+        return;
+    }
+
+    // Only play letter sounds if game didn't end
+    if (isCorrectGuess) {
+        playCorrectGuessSound();
+    } else {
+        playWrongGuessSound();
     }
 
     letterInput.focus();
@@ -227,7 +237,7 @@ function updateHangmanImage() {
     const index = Math.min(gameState.wrongGuesses, 6);
     
     if (gameState.showLetHimCook && !gameState.gameOver) {
-        hangmanImage.src = 'www/Pictures/Let_Him_Cook_Picture.png';
+        hangmanImage.src = 'Pictures/Let_Him_Cook_Picture.png';
     } else {
         hangmanImage.src = imageProgression[index];
     }
@@ -280,12 +290,12 @@ function endGame(won) {
         gameOverTitle.textContent = '🎉 ПОБЕДА!';
         gameOverMessage.textContent = `Поздравления! Открихте думата: ${gameState.word}`;
         playWinSound();
-        gameOverImage.src = 'www/Pictures/GigaChad_Picture.png';
+        gameOverImage.src = 'Pictures/GigaChad_Picture.png';
     } else {
         gameOverTitle.textContent = '😔 ЗАГУБА!';
         gameOverMessage.textContent = `Жалко! Думата беше: ${gameState.word}`;
         playLoseSound();
-        gameOverImage.src = 'www/Pictures/Dead_Picture.png';
+        gameOverImage.src = 'Pictures/Dead_Picture.png';
     }
 
     gameOverModal.classList.remove('d-none');
