@@ -238,7 +238,7 @@ function playCorrectGuessSound() {
     const audio = document.getElementById('correctGuessAudio');
     audio.currentTime = 0;
     audio.play().catch(() => {
-        console.log('Could not play correct guess sound. Please ensure Music/Check mark sound effect.mp3 exists.');
+        console.log('Could not play correct guess sound. Please ensure music/Check mark sound effect.mp3 exists.');
     });
 }
 
@@ -247,7 +247,7 @@ function playWrongGuessSound() {
     const audio = document.getElementById('wrongGuessAudio');
     audio.currentTime = 0;
     audio.play().catch(() => {
-        console.log('Could not play wrong guess sound. Please ensure Music/wrong.mp3 exists.');
+        console.log('Could not play wrong guess sound. Please ensure music/Fart with reverb sound effect.mp3 exists.');
     });
 }
 
@@ -256,7 +256,7 @@ function playWinSound() {
     const audio = document.getElementById('winAudio');
     audio.currentTime = 0;
     audio.play().catch(() => {
-        console.log('Could not play win sound. Please ensure Music/win.mp3 exists.');
+        console.log('Could not play win sound. Please ensure music/Giga Chad - Can You Feel My Heart.mp3 exists.');
     });
 }
 
@@ -265,7 +265,7 @@ function playLoseSound() {
     const audio = document.getElementById('loseAudio');
     audio.currentTime = 0;
     audio.play().catch(() => {
-        console.log('Could not play lose sound. Please ensure Music/lose.mp3 exists.');
+        console.log('Could not play lose sound. Please ensure music/Old Church Bell Sound Effect (HD) _ How to.mp3 exists.');
     });
 }
 
@@ -277,12 +277,12 @@ function endGame(won) {
     const gameOverImage = document.getElementById('gameOverImage');
 
     if (won) {
-        gameOverTitle.textContent = 'ПОБЕДА!';
+        gameOverTitle.textContent = '🎉 ПОБЕДА!';
         gameOverMessage.textContent = `Поздравления! Открихте думата: ${gameState.word}`;
         playWinSound();
         gameOverImage.src = 'Pictures/GigaChad_Picture.png';
     } else {
-        gameOverTitle.textContent = 'ЗАГУБА!';
+        gameOverTitle.textContent = '😔 ЗАГУБА!';
         gameOverMessage.textContent = `Жалко! Думата беше: ${gameState.word}`;
         playLoseSound();
         gameOverImage.src = 'Pictures/Dead_Picture.png';
@@ -295,11 +295,14 @@ function endGame(won) {
 function resetGame() {
     // Stop all audio
     const wrongGuessAudio = document.getElementById('wrongGuessAudio');
+    const correctGuessAudio = document.getElementById('correctGuessAudio');
     const winAudio = document.getElementById('winAudio');
     const loseAudio = document.getElementById('loseAudio');
     
     wrongGuessAudio.pause();
     wrongGuessAudio.currentTime = 0;
+    correctGuessAudio.pause();
+    correctGuessAudio.currentTime = 0;
     winAudio.pause();
     winAudio.currentTime = 0;
     loseAudio.pause();
@@ -313,24 +316,6 @@ function resetGame() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Hangman Game Loaded');
-    console.log('Make sure you have the following folder structure:');
-    console.log('├── Hangman/');
-    console.log('│   ├── Pictures/');
-    console.log('│   │   ├── hang0.png');
-    console.log('│   │   ├── hang1.png');
-    console.log('│   │   ├── hang2.png');
-    console.log('│   │   ├── hang3.png');
-    console.log('│   │   ├── hang4.png');
-    console.log('│   │   ├── hang5.png');
-    console.log('│   │   ├── hang6.png');
-    console.log('│   │   ├── win.png');
-    console.log('│   │   └── lose.png');
-    console.log('│   ├── Music/');
-    console.log('│   │   ├── wrong.mp3');
-    console.log('│   │   ├── win.mp3');
-    console.log('│   │   └── lose.mp3');
-    console.log('│   ├── Hangman.html');
-    console.log('│   ├── Hangman.css');
-    console.log('│   └── Hangman.js');
+    console.log('Hangman Game Loaded Successfully');
+    console.log('Monaca Project Structure is ready');
 });
