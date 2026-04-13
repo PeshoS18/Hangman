@@ -4,14 +4,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Hangman.css">
-    <title>Бесеница</title>
+    <title>Бесеница (Hangman)</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Beсilkata na ciganina BEEE</h1>
+    <div class="container-fluid hangman-container">
+        <!-- Setup Panel -->
+        <div id="setupPanel" class="setup-panel card">
+            <div class="card-body text-center">
+                <h1 class="mb-4">Бесеница</h1>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Изберете език:</label>
+                        <select id="languageSelect" class="form-select">
+                            <option value="BG">Български</option>
+                            <option value="ENG">English</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Изберете сложност:</label>
+                        <select id="difficultySelect" class="form-select">
+                            <option value="easy">Лесно (3-5 букви)</option>
+                            <option value="medium" selected>Средно (6-8 букви)</option>
+                            <option value="hard">Трудно (9+ букви)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="btn btn-lg btn-success">Начало на игра</button>
+            </div>
+        </div>
+
+        <!-- Game Panel -->
+        <div id="gamePanel" class="game-panel d-none">
+            <div class="row">
+                <!-- Left Side - Image -->
+                <div class="col-lg-4 text-center mb-4">
+                    <div class="hangman-image-wrapper">
+                        <img id="hangmanImage" src="Pictures/hang0.png" alt="Hangman" class="img-fluid hangman-img">
+                    </div>
+                    <div class="lives-display mt-3">
+                        <h4>Животи: <span id="livesCount">6</span></h4>
+                    </div>
+                </div>
+
+                <!-- Right Side - Game Content -->
+                <div class="col-lg-8">
+                    <!-- Word Display -->
+                    <div class="word-display-wrapper mb-4">
+                        <h3 class="mb-3">Дума:</h3>
+                        <div id="wordDisplay" class="word-display">
+                            _ _ _ _ _ _
+                        </div>
+                    </div>
+
+                    <!-- Input Section -->
+                    <div class="input-section mb-4 card">
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <input 
+                                    type="text" 
+                                    id="letterInput" 
+                                    class="form-control form-control-lg" 
+                                    placeholder="Въведете буква или дума"
+                                    maxlength="10"
+                                >
+                                <button id="guessBtn" class="btn btn-primary btn-lg">Провери</button>
+                            </div>
+                            <p class="text-muted text-center">Въведете една буква или цялата дума</p>
+                        </div>
+                    </div>
+
+                    <!-- Guessed Letters -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Открити букви:</h5>
+                                    <div id="guessedLetters" class="letters-display">
+                                        -
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Сгрешени букви:</h5>
+                                    <div id="wrongLetters" class="letters-display wrong-letters">
+                                        -
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Message -->
+            <div id="gameOverModal" class="modal d-none">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <div class="game-over-image-wrapper mb-4">
+                                <img id="gameOverImage" src="Pictures/Begin_Picture.png" alt="Game Over" class="img-fluid game-over-img">
+                            </div>
+                            <h2 id="gameOverTitle" class="mb-3">ПОБЕДА</h2>
+                            <p id="gameOverMessage" class="mb-4">Поздравления! Открихте думата!</p>
+                            <button id="restartBtn" class="btn btn-success btn-lg">Нова игра</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Audio Elements -->
+    <audio id="wrongGuessAudio" src="Music/Fart with reverb sound effect.mp3"></audio>
+    <audio id="correctGuessAudio" src="Music/Check mark sound effect.mp3"></audio>
+    <audio id="winAudio" src="Music/Giga Chad - Can You Feel My Heart.mp3"></audio>
+    <audio id="loseAudio" src="Music/Old Church Bell Sound Effect (HD) _ How to.mp3"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="Hangman.js"></script>
 </body>
 
